@@ -1,0 +1,17 @@
+{% extends 'timetable/base.html' %}
+
+{% block title %}Create Timetable{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Create Timetable for {{ section.name }}</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+{% endblock %}

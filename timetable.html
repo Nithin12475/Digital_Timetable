@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ section.name }} Timetable</title>
+</head>
+<body>
+    <h1>{{ section.name }} Timetable</h1>
+    <table border="1">
+        <tr>
+            <th>Day</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Subject</th>
+            <th>Faculty</th>
+        </tr>
+        {% for entry in timetable %}
+        <tr>
+            <td>{{ entry.day }}</td>
+            <td>{{ entry.start_time }}</td>
+            <td>{{ entry.end_time }}</td>
+            <td>{{ entry.subject }}</td>
+            <td>{{ entry.faculty }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to the Digital Timetable System</h1>
+    <h2>Available Sections</h2>
+    <ul>
+        {% for section in sections %}
+            <li>
+                <a href="{% url 'student_timetable' section.id %}">
+                    {{ section.name }} Timetable
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

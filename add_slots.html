@@ -1,0 +1,47 @@
+{% extends 'timetable/base.html' %}
+
+{% block title %}Add Slots{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Add Slots for Timetable ({{ timetable.date }})</h3>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                <label for="start_time" class="form-label">Start Time</label>
+                <input type="time" class="form-control" id="start_time" name="start_time" required>
+            </div>
+            <div class="col-md-4">
+                <label for="end_time" class="form-label">End Time</label>
+                <input type="time" class="form-control" id="end_time" name="end_time" required>
+            </div>
+            <div class="col-md-4">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject" required>
+            </div>
+            <div class="col-md-4 mt-3">
+                <label for="faculty" class="form-label">Faculty</label>
+                <select class="form-select" id="faculty" name="faculty" required>
+                    {% for faculty in faculty_list %}
+                        <option value="{{ faculty.id }}">{{ faculty.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success mt-4">Add Slot</button>
+    </form>
+
+    <h5>Existing Slots</h5>
+    <ul class="list-group">
+        {% for slot in slots %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ slot.start_time }} - {{ slot.end_time }}: {{ slot.subject }} ({{ slot.faculty.username }})
+                <a href="{% url 'delete_slot' slot.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No slots added yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
